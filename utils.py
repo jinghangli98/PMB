@@ -29,16 +29,12 @@ def load_torch_image(fname, seg = True):
         img = K.image_to_tensor(img, False).float() /255.
         img = K.color.bgr_to_rgb(img)
         return img, mask
-        
+
     elif seg == False:
         img = cv2.imread(fname)
         img = K.image_to_tensor(img, False).float() /255.
         img = K.color.bgr_to_rgb(img)
         return img
-
-
-    
-
 
 def get_rotation_matrix(x=0, y=0, z=0):
     """ Computes the rotation matrix.
