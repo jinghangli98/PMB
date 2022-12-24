@@ -21,12 +21,23 @@ import cv2
 import matplotlib.pyplot as plt
 from natsort import natsorted
 
-def load_torch_image(fname):
-    img = remove(cv2.imread(fname))
-    img = img[:, :, 0:3]
-    img = K.image_to_tensor(img, False).float() /255.
-    img = K.color.bgr_to_rgb(img)
-    return img
+def load_torch_image(fname, seg = True):
+    if seg:
+        img = remove(cv2.imread(fname))
+        mask = img[:,:, 3]
+        img = img[:, :, 0:3]
+        img = K.image_to_tensor(img, False).float() /255.
+        img = K.color.bgr_to_rgb(img)
+        return img, mask
+        
+    elif seg == False:
+        img = cv2.imread(fname)
+        img = K.image_to_tensor(img, False).float() /255.
+        img = K.color.bgr_to_rgb(img)
+        return img
+
+
+    
 
 
 def get_rotation_matrix(x=0, y=0, z=0):
