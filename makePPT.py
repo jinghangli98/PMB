@@ -33,7 +33,7 @@ T1_path = natsorted(T1_path)
 T2_path = glob.glob(f'{base_path}/{date}/{ID}/rembg_cam/match_T2/*.png')
 T2_path = natsorted(T2_path)
 
-cam_path = glob.glob(f'{base_path}/{date}/{ID}/rembg_cam/resizedCam/*.png')
+cam_path = glob.glob(f'{base_path}/{date}/{ID}/rembg_cam/resizedCam_adjusted/*.png')
 cam_path = natsorted(cam_path)
 
 ap_layout = glob.glob(f'{base_path}/{date}/{ID}/rembg_cam/ap/*.png')
@@ -48,4 +48,4 @@ for ind in range(len(T1_path)):
     slide.shapes.add_picture(T2_path[ind], Inches(5), Inches(2))
     slide.shapes.add_picture(cam_path[ind], Inches(9), Inches(2))
 # pdb.set_trace()
-prs.save(f"{base_path}{date}/{CWID}.pptx") # saving file
+prs.save(f"{base_path}{date}/{CWID}_test.pptx") # saving file
