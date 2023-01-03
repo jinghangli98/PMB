@@ -15,9 +15,9 @@ slide=prs.slides.add_slide(lyt) # adding a slide
 title=slide.shapes.title # assigning a title
 
 subtitle=slide.placeholders[1] # placeholder for subtitle
-date='2022.12.19-22.22.47'
-ID='ADRC_58'
-CWID='CW22-45'
+ID='ADRC_57'
+date='2022.12.19-19.45.32'
+CWID='CW22-44'
 title.text=f'{CWID}' # title
 subtitle.text=f'{date}' # subtitle
 
@@ -48,4 +48,4 @@ for ind in range(len(T1_path)):
     slide.shapes.add_picture(T2_path[ind], Inches(5), Inches(2))
     slide.shapes.add_picture(cam_path[ind], Inches(9), Inches(2))
 # pdb.set_trace()
-prs.save(f"{base_path}{date}/{CWID}_test.pptx") # saving file
+prs.save(f"{base_path}{date}/{CWID}.pptx") # saving file

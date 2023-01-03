@@ -18,19 +18,13 @@ from natsort import natsorted
 # date=sys.argv[2]
 # ID=sys.argv[3]
 
-ID='ADRC_58'
-date='2022.12.19-22.22.47'
-CW_ID='CW22-45'
+ID='ADRC_57'
+date='2022.12.19-19.45.32'
+CW_ID='CW22-44'
 base_path='/Users/jinghangli/Library/CloudStorage/OneDrive-UniversityofPittsburgh/03-PMB/PMB_ADRC'
-rot_mat = get_rotation_matrix(x=-19.88, y=2.55, z=-7.13) #x y -z
-best_pos = [432, 401, 376, 352, 327, 303, 280, 259, 235, 208, 180, 159, 132, 114, 87, 61]
+rot_mat = get_rotation_matrix(x=-17.44, y=1.76, z=-5.84) #x y -z
+best_pos = [418, 387, 361, 341, 312, 288, 264, 240, 211, 187, 167, 145, 115, 96, 77, 54, 39]
 trans_mat = get_translation_matrix(x=0, y=0, z=0)
-
-start = 387
-end = 39
-thickness = 24
-overlap = 10
-
 
 cam_img = glob.glob(f'{base_path}/{date}/{ID}/rembg_cam/*.png')
 cam_img = natsorted(cam_img)
