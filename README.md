@@ -1,4 +1,4 @@
-# PMB
+# PMB 🧠 👨‍💻
 > Automatic alignment and pathology image reconstruction
 
 
