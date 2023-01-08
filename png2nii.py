@@ -1,41 +1,34 @@
 import nibabel as nib
 import numpy as np
-from natsort import natsorted
-import cv2
 import glob
-import matplotlib.pyplot as plt
-import pdb
+import sys 
+import cv2 as cv
 
-date = '2022.12.19-19.45.32'
-ID = 'ADRC_57'
-start = 418
-end = 39
+base_path=sys.argv[1]
+date=sys.argv[2]
+ID=sys.argv[3]
 
-basepath = '/Users/jinghangli/Library/CloudStorage/OneDrive-UniversityofPittsburgh/03-PMB/PMB_ADRC'
-paths = basepath + '/' + date + '/' + ID + '/rembg_cam/resizedCam_adjusted'
+print(base_path)
+print(ID)
+print(date)
 
-paths = glob.glob(f'{paths}/*.png')
-paths = natsorted(paths)
-# paths.reverse()
+# path='/Users/jinghangli/Library/CloudStorage/OneDrive-UniversityofPittsburgh/03-PMB/PMB_ADRC'
+# ID='ADRC_44'
+# date='2022.10.10-22.12.27'
+png_imgs=glob.glob(f'{base_path}/{date}/{ID}/rmbg_png/*.png')
+png_imgs.sort()
+nii_img=glob.glob(f'{base_path}/{date}/{ID}/mri/T1.nii.gz')
+outpath=f'{base_path}/{date}/{ID}/mri/rmbgT1.nii.gz'
 
-imgs = [cv2.imread(path) for path in paths]
-imgs = [cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) for img in imgs]
+imgs = [cv.cvtColor(cv.imread(p), cv.COLOR_BGR2GRAY) for p in png_imgs]
+nii = nib.load(nii_img[0])
+nii_img = nii.get_fdata()
 
-nii = basepath + '/' + date + '/' + ID + '/mri/T1.nii.gz'
-nii_img = nib.load(nii).get_fdata()
-nii_affine = nib.load(nii).affine
-nii_array = np.zeros(np.shape(nii_img))
+out = np.array(imgs)
+out = np.flip(out, axis=1)
+out = np.transpose(out, [2,0,1])
 
-thickness = np.int(np.ceil((start - end)/len(imgs)))
+out_nii = nib.Nifti1Image(out, affine=nii.affine)
+nib.save(out_nii, outpath)
 
-for i in range(len(imgs)):
-    print(f'{start-i*thickness} -> {start-(i+1)*thickness}')
-    imgs[i] = np.rot90(imgs[i], 2)
-    replicated_img = np.dstack([imgs[i]] * thickness)
-    replicated_img = np.transpose(replicated_img, (1,2,0))
-    nii_array[:,start-(i+1)*thickness:start-i*thickness,:] = replicated_img
 
-    
-nii_png_array = nib.Nifti1Image(nii_array, affine=nii_affine)
-out_path = basepath + '/' + date + '/' + ID + '/mri/png.nii.gz'
-nib.save(nii_png_array, out_path)
