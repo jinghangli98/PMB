@@ -5,11 +5,17 @@ import cv2
 import glob
 import matplotlib.pyplot as plt
 import pdb
+import sys
 
-date = '2023.01.03-20.57.03'
-ID = 'ADRC_60'
-start = 428
-end = 25
+# ID='ADRC_018'
+# date='2022.02.15-22.09.41'
+# start = 459
+# end = 29
+ID=sys.argv[1]
+date=sys.argv[2]
+start=np.int16(sys.argv[3])
+end=np.int16(sys.argv[4])
+
 
 basepath = '/Users/jinghangli/Library/CloudStorage/OneDrive-UniversityofPittsburgh/03-PMB/PMB_ADRC'
 paths = basepath + '/' + date + '/' + ID + '/rembg_cam/resizedCam_adjusted'
@@ -25,8 +31,7 @@ nii = basepath + '/' + date + '/' + ID + '/mri/T1.nii.gz'
 nii_img = nib.load(nii).get_fdata()
 nii_affine = nib.load(nii).affine
 nii_array = np.zeros(np.shape(nii_img))
-
-thickness = np.int(np.ceil((start - end)/len(imgs)))
+thickness = np.int16(np.ceil((start - end)/len(imgs)))
 
 for i in range(len(imgs)):
     print(f'{start-i*thickness} -> {start-(i+1)*thickness}')

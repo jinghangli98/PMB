@@ -6,7 +6,7 @@ from pptx.util import Pt
 import glob
 import datetime as dt
 from natsort import natsorted, ns
-
+import sys
 import pdb
 prs = Presentation()
 
@@ -15,9 +15,15 @@ slide=prs.slides.add_slide(lyt) # adding a slide
 title=slide.shapes.title # assigning a title
 
 subtitle=slide.placeholders[1] # placeholder for subtitle
-ID='ADRC_57'
-date='2022.12.19-19.45.32'
-CWID='CW22-44'
+
+# ID='ADRC_018'
+# date='2022.02.15-22.09.41'
+# CWID='CW22-02'
+
+ID=sys.argv[1]
+date=sys.argv[2]
+CWID=sys.argv[3]
+
 title.text=f'{CWID}' # title
 subtitle.text=f'{date}' # subtitle
 

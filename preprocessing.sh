@@ -5,9 +5,9 @@
 ## Getting images
 cd /Volumes/storinator/scans
 # cd ~/scans
-ID='ADRC_58'
-
-date='2022.12.19-22.22.47'
+ID='ADRC_018'
+date='2022.02.15-22.09.41'
+CW_ID='CW22-02'
 
 T1='MP2RAGE_UNI_Images'
 T2='T2_SPC'
@@ -53,6 +53,9 @@ output=$path/$date/$ID/rmbg_png
 
 mkdir $output
 rembg p $input $output
+
+## segBlob here
+python3 segBlob.py $path $date $ID $CW_ID
 
 cam_input=$path/$date/$ID/cam
 cam_output=$path/$date/$ID/rembg_cam
