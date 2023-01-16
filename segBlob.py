@@ -51,6 +51,7 @@ def boxCrop(input_img, count):
     contours = contours[0] if len(contours) == 2 else contours[1]
     crop_img = []
     box = []
+    box_area = []
     for cntr in contours:
 
         x,y,w,h = cv2.boundingRect(cntr)
@@ -60,9 +61,16 @@ def boxCrop(input_img, count):
             print(f'Area of the bounding box is {w*h}')
             print("x,y,w,h:",x,y,w,h)
             
-            box.append([x,y,w,h])                  
+            box.append([x,y,w,h])
+            box_area.append(w*h)                  
     
     box = natsorted(box)
+    if len(box) == 1 and box_area[0] > 5000000:
+        x,y,w,h = box[0]
+        box = []
+        box = [[x, y, w//2, h], [x + w//2, y, w//2, h]]
+    print(f'{box} | {box_area}')    
+    
     for i in range(len(box)):
         x,y,w,h = box[i]
         crop_img.append(result[y:-1, x:x+w])  
