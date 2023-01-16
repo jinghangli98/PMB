@@ -18,12 +18,12 @@ from natsort import natsorted
 # date=sys.argv[2]
 # ID=sys.argv[3]
 
-ID='ADRC_56'
-date='2022.12.05-23.26.46'
-CW_ID='CW22-43'
+ID='ADRC_61'
+date='2023.01.09-23.13.44'
+CW_ID='CW22-80'
 base_path='/Users/jinghangli/Library/CloudStorage/OneDrive-UniversityofPittsburgh/03-PMB/PMB_ADRC'
-rot_mat = get_rotation_matrix(x=-9.18, y=1.5, z=-9.74) #x y -z
-best_pos = [425, 400, 375, 342, 318, 291, 271, 246, 224, 197, 173, 152, 127, 103, 79, 55, 35]
+rot_mat = get_rotation_matrix(x=-16.17, y=2.62, z=-9.34) #x y -z
+best_pos = [430,400,376, 350, 323, 298, 273, 252, 227, 201, 179, 156, 131, 111, 85, 57, 39]
 trans_mat = get_translation_matrix(x=0, y=0, z=0)
 
 cam_img = glob.glob(f'{base_path}/{date}/{ID}/rembg_cam/*.png')
@@ -145,7 +145,7 @@ for i in range(len(warpped_cam)):
     cv2.imwrite( f'{base_path}/{date}/{ID}/rembg_cam/match_T2/{i}.png', T2_img)
     cv2.imwrite( f'{base_path}/{date}/{ID}/rembg_cam/resizedCam_adjusted/{i}.png', resized_img)
 
-#make ppt
+# #make ppt
 os.system(f'python3 makePPT.py {ID} {date} {CW_ID}')
-#reconstruct png_nii
+# #reconstruct png_nii
 os.system(f'python3 png2nii_cam.py {ID} {date} {best_pos[0]} {best_pos[-1]}')

@@ -5,9 +5,9 @@
 ## Getting images
 cd /Volumes/storinator/scans
 # cd ~/scans
-ID='ADRC_018'
-date='2022.02.15-22.09.41'
-CW_ID='CW22-02'
+ID='ADRC_61'
+date='2023.01.09-23.13.44'
+CW_ID='CW22-80'
 
 T1='MP2RAGE_UNI_Images'
 T2='T2_SPC'
