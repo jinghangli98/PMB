@@ -1,5 +1,5 @@
 # PMB 🧠 👨‍💻
-> Automatic alignment and pathology image reconstruction
+> Automatic alignment and pathology image reconstruction. The alignment process leverages rembg and pretrained LoFTR and demonstrated the robust out of domain adaptation of transformer models for image correspondances. 
 
 
 ### [Alignment Process](https://github.com/jinghangli98/PMB/blob/main/PMB_alignmentProcess.pdf)
